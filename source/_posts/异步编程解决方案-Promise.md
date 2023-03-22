@@ -1,6 +1,8 @@
 ---
 title: 异步编程解决方案-Promise
 date: 2022-08-13 21:05:24
+cover: /image/promise.webp
+thumbnail: /image/promise.webp
 tags: 
    - ES6
    - Promise

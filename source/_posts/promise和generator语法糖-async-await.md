@@ -1,6 +1,8 @@
 ---
 title: promise和generator语法糖-async await
 date: 2022-08-13 21:41:21
+cover: /image/tangguo.webp
+thumbnail: /image/tangguo.webp
 tags:
    - ES6
    - async

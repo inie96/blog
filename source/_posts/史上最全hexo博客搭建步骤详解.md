@@ -1,6 +1,8 @@
 ---
 title: 史上最全hexo博客搭建步骤详解
 date: 2022-05-21 14:08:36
+cover: /image/hexo.webp
+thumbnail: /image/hexo.webp
 tags:
    - hexo
    - icarus
