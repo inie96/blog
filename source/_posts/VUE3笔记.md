@@ -191,6 +191,8 @@ setup(){
 
 ref()函数用来根据给定的值创建一个响应式的数据对象，ref()函数调用的返回值是一个对象，这个对象上只包含一个value属性
 
+常用在操作dom
+
 #### 2、基本语法
 
 ```
@@ -327,7 +329,11 @@ export default {
 
 toRefs()函数可以将reactive()创建出来的响应式对象，转换为普通对象，只不过这个对象上的每个属性节点，都是ref()类型的响应式数据
 
-比如：当想要从一个组合逻辑函数中返回响应式对象时，用 toRefs 是很有效的，该 API 让消费组件可以 解构 / 扩展（使用 ... 操作符）返回的对象，并不会丢失响应性
+注意！！！使用场景
+比如：当想要从一个组合逻辑函数中返回响应式对象时，用 toRefs 是很有效的，<span style="color:red">该 API 让消费组件可以 解构 / 扩展（使用 ... 操作符）返回的对象，并不会丢失响应性<span>
+
+1.多个属性再一个对象中
+2.多个方法在一个对象中
 
 #### 2、基本语法
 
@@ -337,9 +343,16 @@ import { reactive ,toRefs } from "vue";
 
 2)...toRefs(state)创建响应式数据对象
 setup(){
-	let state = reactive({id:10});
+	let state = reactive({
+          id:10
+        });
+        let methods = {
+          fun1 (){}
+          fun2 (){}
+        });     
     return { 
-      ...toRefs(state)
+      ...toRefs(state),
+      ...methods //方法不用toRefs,方法处理的就是包裹在reactive中的响应式数据，环环相扣的
     };
 }
 
@@ -400,7 +413,7 @@ import { reactive ,toRefs ,computed} from "vue";
 setup(){
 	let state = reactive({
       id:10,
-      n1:computed(()=>state.id+1)  //计算属性的方式
+      n1:computed(()=>state.id+1)  //计算属性的方式，可以直接写在这里
       n2:computed(function(){
         state.id+2
       })
@@ -454,6 +467,12 @@ export default {
 #### 1、简介
 
 watch() 函数用来监视某些数据项的变化，从而触发某些特定的操作
+
+面包屑用的还挺多的
+优先使用：响应式>计算属性>监听
+
+监听是监听某个值
+计算属性是处理这个属性的任何一个值变化都会触发变化
 
 #### 2、基本语法
 
@@ -574,6 +593,8 @@ setup(){
       console.log('unmounted!')
     })
 }
+
+常用在轮播
 ```
 
 #### 2、新旧对比
@@ -639,9 +660,16 @@ export default {
 </script>
 ```
 
-
+### 父子数据传递3种方式
+1、:item='item' 和 props:{}
+2、provide和inject 不是异步的 
+provide可以给多个子组件传数据用inject接收即可 不用每个组件都写:了
+以上两个都是在父请求完数据再传到子
+3、Suspense 异步加载组件
+要在setup 处加 async await 获取异步数据 直接在子请求数据
 
 ### provide和inject
+
 
 #### 1、简介
 
@@ -827,10 +855,28 @@ export default {
   }
 }
 ```
+## 什么时候用路由守卫？什么时候用生命周期钩子
+1、路由是其中一个参数变化了路由就要重新加载，影响效率
+2、生命周期钩子是在组件的生命周期，只要路由没变，就不会重新加载一遍
 
 ##  Vue Router 4
 
+
 现在我们安装 vue-router 版本的时候，默认还是安装的 3.x 版本的，由于 vue3 的更新发生很大的变化，所以为了兼容处理，vue-router 也将发布最新版 4.x 版本了。
+
+#### 数据处理方式
+
+例子 底部导航 
+静态数据
+1、在页面写死
+2、在setup内定义数据
+3、发送请求获取数据
+4、页面引入单独数据文件
+
+#### 路由数据信息处理
+
+1、直接在路由里写完整数据，不需要外部引入
+2、路由数据提到外部，内部再遍历动态引入数据
 
 #### 1、创建方式
 
@@ -1007,9 +1053,20 @@ export default {
 
 12） 用创建好的实例调用beforeRouteEnter守卫中传递给next的回调函数
 
+
 ## Vuex4
 
 #### 1、创建方式
+
+state定义的初始化数据
+
+getters相当于计算属性
+
+actions和mutations的区别
+
+actions相当于产品 用dispatch触发
+mutations相当于开发 用commit触发
+用户点击页面进行交互先在actions过滤一下需求再去commit触发mutations
 
 ```
 创建 store 容器实例
