@@ -1,68 +1,68 @@
 ---
-title: VUE3笔记
+title: Vue3笔记
 date: 2023-03-24 23:32:11
 tags:
-    - VUE3
+    - Vue3
 categories:
     - 笔记
 ---
 详见下文
 <!--more-->
 
-## VUE3新特性
+## Vue3新特性
 
-### vue3项目的创建
+### Vue3项目的创建
 
-#### 安装vue-cli脚手架构建工具
+#### 安装Vue-cli脚手架构建工具
 
-vue-cli 提供一个官方命令行工具，可用于快速搭建大型单页应用。
+Vue-cli 提供一个官方命令行工具，可用于快速搭建大型单页应用。
 
 输入命令
 
 ```
-cnpm install -g @vue/cli
+cnpm install -g @Vue/cli
 ```
 
-![image](../image/vue3_notes/1.png)
+![image](../image/Vue3_notes/1.png)
 
-查看版本，要求vue-cli版本在4.5以上，可以创建vue3项目
+查看版本，要求Vue-cli版本在4.5以上，可以创建Vue3项目
 
-![image](../image/vue3_notes/2.png)
+![image](../image/Vue3_notes/2.png)
 
-#### 创建vue3项目
+#### 创建Vue3项目
 
-vue create 项目名称
+Vue create 项目名称
 
-![image](../image/vue3_notes/3.png)
+![image](../image/Vue3_notes/3.png)
 
 手动安装
 
-![image](../image/vue3_notes/4.png)
+![image](../image/Vue3_notes/4.png)
 
-![image](../image/vue3_notes/5.png)
+![image](../image/Vue3_notes/5.png)
 
-![image](../image/vue3_notes/6.png)
+![image](../image/Vue3_notes/6.png)
 
-![image](../image/vue3_notes/7.png)
+![image](../image/Vue3_notes/7.png)
 
-![image](../image/vue3_notes/8.png)
+![image](../image/Vue3_notes/8.png)
 
-![image](../image/vue3_notes/9.png)
+![image](../image/Vue3_notes/9.png)
 
-![image](../image/vue3_notes/10.png)
+![image](../image/Vue3_notes/10.png)
 
 #### 启动项目
 
-![image](../image/vue3_notes/11.png)
+![image](../image/Vue3_notes/11.png)
 
-![image](../image/vue3_notes/12.png)
+![image](../image/Vue3_notes/12.png)
 
 ###  createApp
 
 在 Vue 3 中，改变全局 Vue 行为的 API 现在被移动到了由新的 `createApp` 方法所创建的应用实例上。
 
 ```
-import { createApp } from 'vue'
+import { createApp } from 'Vue'
 const app = createApp({})
 ```
 
@@ -70,20 +70,20 @@ const app = createApp({})
 
 另外，由于 `createApp` 方法返回应用实例本身，因此可以在其后链式调用其它方法
 
-vue3.0中使用createApp 来创建vue实例
+Vue3.0中使用createApp 来创建Vue实例
 
 ```
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'Vue'
+import App from './App.Vue'
 const app = createApp(App);
 app.mount('#app');
 ```
 
-main.js 下加载router、vuex
+main.js 下加载router、Vuex
 
 ```
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'Vue'
+import App from './App.Vue'
 import router from './router'
 import store from './store'
 
@@ -100,7 +100,7 @@ createApp(App).use(store).use(router).mount('#app')
 
 #### 1、简介
 
-setup函数是vue3中专门为组件提供的新属性。
+setup函数是Vue3中专门为组件提供的新属性。
 
 #### 2、执行时机
 
@@ -120,7 +120,7 @@ setup函数是vue3中专门为组件提供的新属性。
 </template>
 
 <script>
-import { reactive } from "vue"
+import { reactive } from "Vue"
 export default {
 	props:{
 		item:String
@@ -153,7 +153,7 @@ reactive()函数接收一个普通对象，返回一个响应式的数据对象
 
 ```
 按需导入reactive函数
-import { reactive} from "vue"
+import { reactive} from "Vue"
 
 创建响应式数据对象
 const state = reactive({ id:1 })
@@ -163,7 +163,7 @@ const state = reactive({ id:1 })
 
 ```
 1)按需导入reactive函数
-import { reactive} from "vue"
+import { reactive} from "Vue"
 
 2)在setup()函数中调用reactive()函数，创建响应式数据对象
 setup(){
@@ -197,7 +197,7 @@ ref()函数用来根据给定的值创建一个响应式的数据对象，ref()�
 
 ```
 1)按需导入ref函数
-import { ref } from "vue"
+import { ref } from "Vue"
 
 2)在setup()函数中调用ref()函数，创建响应式数据对象
 setup(){
@@ -224,7 +224,7 @@ setup(){
 </template>
 
 <script>
-import { ref } from "vue"
+import { ref } from "Vue"
 
 export default {
   setup(){
@@ -251,7 +251,7 @@ export default {
 </template>
 
 <script>
-import { ref,reactive,onMounted } from "vue"
+import { ref,reactive,onMounted } from "Vue"
 
 export default {
   setup(){
@@ -282,7 +282,7 @@ reactive的用法与ref的用法相似，也是将数据变成响应式数据，
 </template>
  
 <script>
-import { reactive } from "vue";
+import { reactive } from "Vue";
 export default {
   setup() {
     let d = reactive(10);
@@ -307,7 +307,7 @@ export default {
 </template>
  
 <script>
-import { reactive } from "vue";
+import { reactive } from "Vue";
 export default {
   setup() {
     let d = reactive({id:10});  //对象可同步渲染
@@ -339,7 +339,7 @@ toRefs()函数可以将reactive()创建出来的响应式对象，转换为普�
 
 ```
 1)按需导入toRefs函数
-import { reactive ,toRefs } from "vue";
+import { reactive ,toRefs } from "Vue";
 
 2)...toRefs(state)创建响应式数据对象
 setup(){
@@ -375,7 +375,7 @@ setup(){
 </template>
  
 <script>
-import { reactive ,toRefs } from "vue";
+import { reactive ,toRefs } from "Vue";
 export default {
   setup() {
     let state = reactive({id:10});
@@ -407,7 +407,7 @@ computed()用来创建计算属性，computed()函数的返回值是一个 ref �
 
 ```
 1)按需导入computed()
-import { reactive ,toRefs ,computed} from "vue";
+import { reactive ,toRefs ,computed} from "Vue";
 
 2)在setup()函数中调用computed()函数
 setup(){
@@ -440,7 +440,7 @@ setup(){
 </template>
  
 <script>
-import { reactive ,toRefs ,computed} from "vue";
+import { reactive ,toRefs ,computed} from "Vue";
 export default {
   setup() {
     let state = reactive({
@@ -478,7 +478,7 @@ watch() 函数用来监视某些数据项的变化，从而触发某些特定的
 
 ```
 1)按需导入watch()
-import { reactive ,toRefs ,watch} from "vue";
+import { reactive ,toRefs ,watch} from "Vue";
 
 2)在setup()函数中调用watch()函数
 setup() {
@@ -501,7 +501,7 @@ setup() {
 </template>
  
 <script>
-import { reactive ,toRefs ,watch} from "vue";
+import { reactive ,toRefs ,watch} from "Vue";
 export default {
   setup() {
     let state = reactive({
@@ -540,7 +540,7 @@ export default {
 </template>
  
 <script>
-import { reactive ,toRefs ,watch} from "vue";
+import { reactive ,toRefs ,watch} from "Vue";
 export default {
   setup() {
     let state = reactive({
@@ -579,7 +579,7 @@ export default {
 
 ```
 1)新版的生命周期函数，可以按需导入到组件中，且只能在 setup() 函数中使用
-import { onMounted, onUpdated, onUnmounted} from "vue";
+import { onMounted, onUpdated, onUnmounted} from "Vue";
 
 2)在setup()函数中调用computed()函数
 setup(){
@@ -622,7 +622,7 @@ errorCaptured -> onErrorCaptured
 </template>
  
 <script>
-import { reactive ,toRefs ,onMounted, onUpdated, onUnmounted} from "vue";
+import { reactive ,toRefs ,onMounted, onUpdated, onUnmounted} from "Vue";
 export default {
   setup() {
     var timer = null;
@@ -680,7 +680,7 @@ provide()和 inject()可以实现嵌套组件之间的数据传递。这两个�
 ```
 父组件：
 1)按需导入provide()
-import { reactive ,toRefs ,provide} from "vue";
+import { reactive ,toRefs ,provide} from "Vue";
 
 2)在setup()函数中调用provide()函数
 setup() {
@@ -691,7 +691,7 @@ setup() {
 
 子组件：
 1)按需导入provide()
-import { reactive,toRefs,inject} from "vue"
+import { reactive,toRefs,inject} from "Vue"
 
 2)在setup()函数中调用inject()函数
   setup(props){
@@ -720,7 +720,7 @@ import { reactive,toRefs,inject} from "vue"
 import Demo1 from '@/components/demo1'
 import Demo2 from '@/components/demo2'
 // 1. 按需导入 provide
-import { reactive ,toRefs ,provide} from "vue";
+import { reactive ,toRefs ,provide} from "Vue";
 
 export default {
   setup() {
@@ -746,7 +746,7 @@ export default {
 </template>
 
 <script>
-import { reactive,computed, provide,inject,toRefs} from "vue"
+import { reactive,computed, provide,inject,toRefs} from "Vue"
 export default {
   setup(props){
     //创建响应式数据对象
@@ -771,7 +771,7 @@ export default {
 </template>
 
 <script>
-import { reactive,computed, provide,inject,toRefs} from "vue"
+import { reactive,computed, provide,inject,toRefs} from "Vue"
 export default {
   setup(props){
     //创建响应式数据对象
@@ -811,7 +811,7 @@ Suspense组件用于在等待某个异步组件解析时显示后备内容。
 		<Async/>
 	</template>
 </Suspense> 
-具名插槽的缩写是在 vue2.6.0 新增，跟 v-on 和 v-bind 一样，v-slot 也有缩写， 替换为字符 #。例如 v-slot:header 可以被重写为 #header
+具名插槽的缩写是在 Vue2.6.0 新增，跟 v-on 和 v-bind 一样，v-slot 也有缩写， 替换为字符 #。例如 v-slot:header 可以被重写为 #header
 ```
 
 ```
@@ -862,7 +862,7 @@ export default {
 ##  Vue Router 4
 
 
-现在我们安装 vue-router 版本的时候，默认还是安装的 3.x 版本的，由于 vue3 的更新发生很大的变化，所以为了兼容处理，vue-router 也将发布最新版 4.x 版本了。
+现在我们安装 Vue-router 版本的时候，默认还是安装的 3.x 版本的，由于 Vue3 的更新发生很大的变化，所以为了兼容处理，Vue-router 也将发布最新版 4.x 版本了。
 
 #### 数据处理方式
 
@@ -883,7 +883,7 @@ export default {
 利用createRouter 用来创建router对象
 
 ```
-import { createRouter } from 'vue-router'
+import { createRouter } from 'Vue-router'
 
 const router = createRouter({
   routes
@@ -909,7 +909,7 @@ createWebHistory路由模式路径不带#号()
 createWebHistory(history)
 
 ```
-import { createRouter,createWebHashHistory } from 'vue-router'
+import { createRouter,createWebHashHistory } from 'Vue-router'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -923,7 +923,7 @@ const router = createRouter({
 因为setup中不能访 this,所以提供两个api来获取 router 和 route ， useRouter() 和 useRoute()
 
 ```
-import { useRouter,useRoute } from "vue-router"
+import { useRouter,useRoute } from "Vue-router"
    export default({      
      setup(){
        const router = useRouter();  //router是全局路由的实例,是VueRouter的实例
@@ -999,7 +999,7 @@ const routes = [
 
 ```
 <script>
-import { reactive, toRefs } from "vue"
+import { reactive, toRefs } from "Vue"
 export default {
   setup(props, context) {  
     const state = reactive({});
@@ -1070,7 +1070,7 @@ mutations相当于开发 用commit触发
 
 ```
 创建 store 容器实例
-import { createStore } from 'vuex'
+import { createStore } from 'Vuex'
 const state = {
     isNavShow:true 
 };
@@ -1109,7 +1109,7 @@ export default store;
 #### 2、组件中的使用
 
 ```
-import { useStore } from "vuex";  //导入vuex
+import { useStore } from "Vuex";  //导入Vuex
 export default {
   props:{
       name:String
@@ -1129,7 +1129,7 @@ setup(props, context) {
 ####  3、State 和 Getters 的用法
 
 ```
-import { useStore } from "vuex";  //导入vuex
+import { useStore } from "Vuex";  //导入Vuex
 export default {
   props:{
       name:String
@@ -1151,7 +1151,7 @@ setup(props, context) {
 #### 4、Mutations 和 Actions 的用法
 
 ```
-import { useStore } from "vuex";  //导入vuex
+import { useStore } from "Vuex";  //导入Vuex
 export default {
   props:{
       name:String

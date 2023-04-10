@@ -1,8 +1,9 @@
 ---
-title: vuex笔记
+title: Vuex笔记
 date: 2023-04-10 20:23:55
 tags:
-    - VUE
+    - Vue
+    - Vuex
 categories:
     - 笔记
 ---
