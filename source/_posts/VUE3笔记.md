@@ -455,6 +455,8 @@ export default {
 
 watch() 函数用来监视某些数据项的变化，从而触发某些特定的操作
 
+不要添加太多监听，影响性能，本来vue就是响应式数据
+
 #### 2、基本语法
 
 ```
@@ -832,6 +834,10 @@ export default {
 
 现在我们安装 vue-router 版本的时候，默认还是安装的 3.x 版本的，由于 vue3 的更新发生很大的变化，所以为了兼容处理，vue-router 也将发布最新版 4.x 版本了。
 
+动态路由的几种方式：
+1、默认写死
+2、通过后端返回的角色动态对路由进行过滤
+
 #### 1、创建方式
 
 利用createRouter 用来创建router对象
@@ -876,9 +882,11 @@ const router = createRouter({
 
 因为setup中不能访 this,所以提供两个api来获取 router 和 route ， useRouter() 和 useRoute()
 
+但是 除了setup，比如在computed、methods中可以使用`this.$router、this.$route`
+
 ```
 import { useRouter,useRoute } from "vue-router"
-   export default({      
+   export default({
      setup(){
        const router = useRouter();  //router是全局路由的实例,是VueRouter的实例
        const route = useRoute(); //route对象表示当前的路由信息，包含了当前 URL 解析得到的信息
@@ -931,6 +939,8 @@ router.afterEach((to, from) =>{
 和router.beforeEach类似，区别是在导航被确认之前，同时在所有组件内守卫和异步路由组件被解析之后，解析守卫就被调用
 
 ##### 4 、路由专享守卫 beforeEnter
+
+它们只有在 从一个不同的 路由导航 进入时，才会被触发。
 
 ```
 const routes = [
