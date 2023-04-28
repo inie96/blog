@@ -1,15 +1,15 @@
 ---
-title: VUE官方视频解读
+title: Vue官方视频解读
 date: 2023-03-24 22:40:07
 tags:
-    - VUE
+    - Vue
 categories:
     - 笔记
 ---
 详见下文
 <!--more-->
 
-### VUE核心概念
+### Vue核心概念
 
 #### 渐进式js框架
 
@@ -34,17 +34,17 @@ categories:
 
 步骤
 ```
-引入vue库
-创建vue实例
+引入Vue库
+创建Vue实例
 通过应用ID嵌入到我们的根元素（el）中
 将数据放入一个叫data的对象中
 用双括号表达式展示数据
 ```
 
 魔力：
-数据变更时vue自动更新html
-vue是响应式的reactive
-数据改变时 vue会帮你更新所有页面上用到它的地方
+数据变更时Vue自动更新html
+Vue是响应式的reactive
+数据改变时 Vue会帮你更新所有页面上用到它的地方
 除了字符串，其他数据类型也是如此
 
 #### v-for指令
@@ -57,7 +57,7 @@ fetch
 
 reduce求和
 
-#### chrome的vue插件
+#### chrome的Vue插件
 
 查看页面中的数量
 
@@ -66,10 +66,10 @@ reduce求和
 input框增加v-model指令和数量做绑定
 快速变更数据
 
-#### 初始化vue工程
+#### 初始化Vue工程
 
 ```
-vue init webpack my-project
+Vue init webpack my-project
 
 build
 config
@@ -79,10 +79,10 @@ static
 test
 ```
 
-#### vue单文件组件
+#### Vue单文件组件
 
 ```
-.vue
+.Vue
 
 HTML
 JS
