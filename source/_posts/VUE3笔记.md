@@ -280,7 +280,7 @@ reactive的用法与ref的用法相似，也是将数据变成响应式数据，
     <button  @click="change()">click</button>
   </div>
 </template>
- 
+
 <script>
 import { reactive } from "Vue";
 export default {
@@ -305,7 +305,7 @@ export default {
     <button  @click="change()">click</button>
   </div>
 </template>
- 
+
 <script>
 import { reactive } from "Vue";
 export default {
@@ -349,8 +349,8 @@ setup(){
         let methods = {
           fun1 (){}
           fun2 (){}
-        });     
-    return { 
+        });
+    return {
       ...toRefs(state),
       ...methods //方法不用toRefs,方法处理的就是包裹在reactive中的响应式数据，环环相扣的
     };
@@ -373,7 +373,7 @@ setup(){
     <button  @click="change()">click</button>
   </div>
 </template>
- 
+
 <script>
 import { reactive ,toRefs } from "Vue";
 export default {
@@ -384,7 +384,7 @@ export default {
       console.log(state.id);
     }
     return {  //如果只返回state，可以return state但还有其它对象
-      //...state ,  单向数据绑定,不支持双向数据渲染  
+      //...state ,  单向数据绑定,不支持双向数据渲染
       //ES6中的扩展运算符和解构会把双向数据渲染的特性取消,除非用到toRefs来处理
       //toRefs函数可以将reactive创建出来的对象都转化为ref形式的响应式数据
       ...toRefs(state),  //转成ref形式的响应式数据
@@ -438,7 +438,7 @@ setup(){
     <button  @click="change()">click</button>
   </div>
 </template>
- 
+
 <script>
 import { reactive ,toRefs ,computed} from "Vue";
 export default {
@@ -451,9 +451,9 @@ export default {
       state.id+=1;
       console.log(state.id);
     }
-    return {  
-      ...toRefs(state), 
-      change  
+    return {
+      ...toRefs(state),
+      change
     }
   },
 };
@@ -467,6 +467,8 @@ export default {
 #### 1、简介
 
 watch() 函数用来监视某些数据项的变化，从而触发某些特定的操作
+
+不要添加太多监听，影响性能，本来vue就是响应式数据
 
 面包屑用的还挺多的
 优先使用：响应式>计算属性>监听
@@ -499,7 +501,7 @@ setup() {
     <button  @click="change()">click</button>
   </div>
 </template>
- 
+
 <script>
 import { reactive ,toRefs ,watch} from "Vue";
 export default {
@@ -509,7 +511,7 @@ export default {
       type:'偶数'
     });
     //监听state.id的值的变化
-    watch(() => state.id, (cur, old) => { 
+    watch(() => state.id, (cur, old) => {
       if(cur % 2 == 0 ){
         state.type = '偶数'
       }else {
@@ -519,9 +521,9 @@ export default {
     function change() {
       state.id+=1;
     }
-    return {  
-      ...toRefs(state), 
-      change  
+    return {
+      ...toRefs(state),
+      change
     }
   },
 };
@@ -538,7 +540,7 @@ export default {
     <button  @click="change()">click</button>
   </div>
 </template>
- 
+
 <script>
 import { reactive ,toRefs ,watch} from "Vue";
 export default {
@@ -548,7 +550,7 @@ export default {
       type:'偶数'
     });
     // 创建监听，并得到停止函数
-    const stop = watch(() => state.id, (cur, old) => { 
+    const stop = watch(() => state.id, (cur, old) => {
       if(cur % 2 == 0 ){
         state.type = '偶数'
       }else {
@@ -562,9 +564,9 @@ export default {
         stop()
       }
     }
-    return {  
-      ...toRefs(state), 
-      change  
+    return {
+      ...toRefs(state),
+      change
     }
   },
 };
@@ -632,7 +634,7 @@ export default {
     });
     const autoPlay=()=>{
         state.num++;
-        if(state.num == 5){   
+        if(state.num == 5){
             state.num = 0;
         }
     }
@@ -642,17 +644,17 @@ export default {
     onMounted(()=>{   //挂载完成
         play();
     })
-    onUpdated(()=>{   
+    onUpdated(()=>{
         if(state.num % 2 == 0 ){
           state.type = '偶数'
         }else {
           state.type = '奇数'
         }
     })
-    onUnmounted(()=>{  //销毁 
+    onUnmounted(()=>{  //销毁
       clearInterval(timer);
     })
-    return {  
+    return {
       ...toRefs(state)
     }
   },
@@ -662,7 +664,7 @@ export default {
 
 ### 父子数据传递3种方式
 1、:item='item' 和 props:{}
-2、provide和inject 不是异步的 
+2、provide和inject 不是异步的
 provide可以给多个子组件传数据用inject接收即可 不用每个组件都写:了
 以上两个都是在父请求完数据再传到子
 3、Suspense 异步加载组件
@@ -810,7 +812,7 @@ Suspense组件用于在等待某个异步组件解析时显示后备内容。
 	<template #default>
 		<Async/>
 	</template>
-</Suspense> 
+</Suspense>
 具名插槽的缩写是在 Vue2.6.0 新增，跟 v-on 和 v-bind 一样，v-slot 也有缩写， 替换为字符 #。例如 v-slot:header 可以被重写为 #header
 ```
 
@@ -820,7 +822,7 @@ Suspense组件用于在等待某个异步组件解析时显示后备内容。
 	<template #fallback>
 		<h1>Loading...</h1>
 	</template>
-</Suspense> 
+</Suspense>
 ```
 
 ####  4、如何运用
@@ -841,11 +843,11 @@ Suspense组件用于在等待某个异步组件解析时显示后备内容。
 List子组件中的处理
 
 ```
-import {getPage} from '@/api/http' 
+import {getPage} from '@/api/http'
 
-export default {  
+export default {
   async setup(){
-    const res = await getPage(); 
+    const res = await getPage();
     const state = reactive({
       items : res.data.data
     });
@@ -866,7 +868,7 @@ export default {
 
 #### 数据处理方式
 
-例子 底部导航 
+例子 底部导航
 静态数据
 1、在页面写死
 2、在setup内定义数据
@@ -877,6 +879,10 @@ export default {
 
 1、直接在路由里写完整数据，不需要外部引入
 2、路由数据提到外部，内部再遍历动态引入数据
+
+动态路由的几种方式：
+1、默认写死
+2、通过后端返回的角色动态对路由进行过滤
 
 #### 1、创建方式
 
@@ -922,9 +928,11 @@ const router = createRouter({
 
 因为setup中不能访 this,所以提供两个api来获取 router 和 route ， useRouter() 和 useRoute()
 
+但是 除了setup，比如在computed、methods中可以使用`this.$router、this.$route`
+
 ```
-import { useRouter,useRoute } from "Vue-router"
-   export default({      
+import { useRouter,useRoute } from "vue-router"
+   export default({
      setup(){
        const router = useRouter();  //router是全局路由的实例,是VueRouter的实例
        const route = useRoute(); //route对象表示当前的路由信息，包含了当前 URL 解析得到的信息
@@ -978,6 +986,8 @@ router.afterEach((to, from) =>{
 
 ##### 4 、路由专享守卫 beforeEnter
 
+它们只有在 从一个不同的 路由导航 进入时，才会被触发。
+
 ```
 const routes = [
   {
@@ -993,6 +1003,7 @@ const routes = [
     }
   }
 }
+]
 ```
 
 ##### 5 、组件内守卫 beforeRouteEnter,beforeRouteUpdate,beforeRouteLeave
@@ -1001,10 +1012,10 @@ const routes = [
 <script>
 import { reactive, toRefs } from "Vue"
 export default {
-  setup(props, context) {  
+  setup(props, context) {
     const state = reactive({});
       return {
-        ...toRefs(state), 
+        ...toRefs(state),
       };
   },
    beforeRouteEnter (to, from, next) {   //组件内守卫
@@ -1072,27 +1083,27 @@ mutations相当于开发 用commit触发
 创建 store 容器实例
 import { createStore } from 'Vuex'
 const state = {
-    isNavShow:true 
+    isNavShow:true
 };
-var getters = {  
+var getters = {
     showNav(state){
         return state.isNavShow
     }
 }
-const actions={   
-    SHOWNAV({commit}){   
+const actions={
+    SHOWNAV({commit}){
         commit('SHOWNAV');
     },
-    HIDENAV({commit}){ 
+    HIDENAV({commit}){
         commit('HIDENAV');
     }
 };
 
-const mutations = { 
-    SHOWNAV(state){  
+const mutations = {
+    SHOWNAV(state){
         state.isNavShow=true;
     },
-    HIDENAV(state){ 
+    HIDENAV(state){
         state.isNavShow=false;
     },
 };
@@ -1114,12 +1125,12 @@ export default {
   props:{
       name:String
   },
-setup(props, context) {  
+setup(props, context) {
   let store = useStore(); //定义store
   const state = reactive({});
-  
+
     return {
-      ...toRefs(state),  
+      ...toRefs(state),
       store
     };
   },
@@ -1134,14 +1145,14 @@ export default {
   props:{
       name:String
   },
-setup(props, context) {  
+setup(props, context) {
   let store = useStore(); //定义store
   const state = reactive({
   	showNav:computed(()=>store.getters.showNav)
   });
-  
+
     return {
-      ...toRefs(state),  
+      ...toRefs(state),
       store
     };
   },
@@ -1156,7 +1167,7 @@ export default {
   props:{
       name:String
   },
-setup(props, context) {  
+setup(props, context) {
   let store = useStore(); //定义store
   const state = reactive({});
   onUnmounted(()=>{  //生命周期-销毁
@@ -1167,7 +1178,7 @@ setup(props, context) {
       store.dispatch('HIDENAV');
   })
   return {
-      ...toRefs(state),  
+      ...toRefs(state),
       store
   }
 }
