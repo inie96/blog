@@ -21,11 +21,13 @@ categories:
 + 搭建本地服务器
 
 ### 什么是webpack
+
 + 包含两个核心：模块 和 打包
 + 打包工具：grunt/gulp/webpack
 ![ivPVtb.png](https://i.328888.xyz/2023/04/26/ivPVtb.png)
 
 ### 前端模块化
+
 + 打包生成大部分浏览器可以识别的代码
 + 不仅js可以模块化，css图片等都可以
 + 处理各个模块之间的依赖，形成关系网
@@ -41,7 +43,7 @@ categories:
 + node环境为了正常执行很多代码，需要很多依赖包
 + npm工具（node package manager）是安装node必备的，用来方便管理各种依赖包
 
-### webpack安装 
+### webpack安装
 
 + webpack依赖node环境，所以先安装node(node版本不小于8.9)
 + 使用node中的包管理工具npm安装webpack
@@ -52,7 +54,7 @@ categories:
 ### webpack起步
 
 + 项目重要文件
-  + src 
+  + src
     dist->distribution(发布)
 + webpack会自动处理模块之间的依赖，所以只打包main.js的文件，其他的依赖关系交给webpack处理
 + 开发流程(webpack基本使用)：
@@ -86,12 +88,11 @@ categories:
   + __dirname是node上下文的一个全局变量，他保存的就是当前webpack.config.js这个文件所在的路径
   ![iJ1OdX.png](https://i.328888.xyz/2023/04/28/iJ1OdX.png)
 
-
 + webpack命令和npm run build命令映射
-+ 
++
   ![package.json定义打包 ](https://i.328888.xyz/2023/04/29/iJQDDV.png)
   ![iJQ4JN.png](https://i.328888.xyz/2023/04/29/iJQ4JN.png)
-  + 在package.json文件中scripts中添加build对应webpack，这样在命令行输入npm run build 时 执行的就是webpack这条命令 
+  + 在package.json文件中scripts中添加build对应webpack，这样在命令行输入npm run build 时 执行的就是webpack这条命令
   ![iJ1BNb.png](https://i.328888.xyz/2023/04/28/iJ1BNb.png)
 
 + webpack本地安装配置
@@ -104,19 +105,91 @@ categories:
   ![iJ1QhP.png](https://i.328888.xyz/2023/04/29/iJ1QhP.png)
   + 如果直接在终端webpack此时用的是全局的webpack（除非找到wcj文件下再执行wbpk），而定义build脚本后运行npm run build则是优先在本地寻找wbpk版本，本地没有再去全局找
 
+### webpack核心概念之一——loader
+
++ 为了项目运行时，css文件不单独一个个引用，一样打包到bundle.js文件中，到时候只引用这一个文件就能展示了，我们引入loader这个概念
+
+![依赖css文件](https://i.328888.xyz/2023/04/29/iKzKNE.png)
+![证明打包css文件需要安装合适的loader](https://i.328888.xyz/2023/04/29/iK6VrV.png)
+![样式相关loader](https://i.328888.xyz/2023/04/29/iK6x1t.png)
+
++ 样式loader的使用
+  1. 按照命令安装
+  2. 在config文件引用
+
++ css-loader只负责帮助你加载css文件，不负责解析css代码，也不会把css代码放到html中让样式生效
+
++ 配置css文件的含义
+![匹配和应用](https://i.328888.xyz/2023/04/29/iKF5cF.png)
+`/ \.css$/`
+`.` 在正则中有特殊含义 所以 `\.` 进行转义
+匹配`.css`
+`^`开始
+`$`结尾
+
+![iKzN4V.png](https://i.328888.xyz/2023/04/29/iKzN4V.png)
+![iKFatc.png](https://i.328888.xyz/2023/04/29/iKFatc.png)
+![iKGZGd.png](https://i.328888.xyz/2023/04/29/iKGZGd.png)
+![iKGDta.png](https://i.328888.xyz/2023/04/29/iKGDta.png)
+![iKGw23.png](https://i.328888.xyz/2023/04/29/iKGw23.png)
+
+### less文件处理
+
+1. 步骤
+
++ 创建less文件，些一些less代码
++ 在main.js引用less文件
++ 打包main.js
++ 在index.html引用打包的js文件
++ 测试代码是否执行成功
++ 测试需要less的loader
++ 安装less-loader和less
++ 在webpack.config文件加上less规则
+![iTTp4H.png](https://i.328888.xyz/2023/05/05/iTTp4H.png)
+![iTT72P.png](https://i.328888.xyz/2023/05/05/iTT72P.png)
 
 
+### 图片资源文件处理
+
++ 创建图片文件
++ 安装url-loader
++ 配置图片文件
++ 文件大小*1024比limit小——直接转成base64字符串文件
++ 比limit大——要安装file-loader(不需要再配置)
+  + 会在dist文件下打包了一个图片文件，用哈希值命名的，为了不重复
+  + 如果安装后找不到图片路径要配置一下路径（publicPath:'dist/'），保证引用打包后图片文件的路径正确
+  + 对图片命名进行规范
+
+![iTTQhp.png](https://i.328888.xyz/2023/05/05/iTTQhp.png)
+![iTTuHv.png](https://i.328888.xyz/2023/05/05/iTTuHv.png)
+![iTaZe3.png](https://i.328888.xyz/2023/05/05/iTaZe3.png)
+![iTaiay.png](https://i.328888.xyz/2023/05/05/iTaiay.png)
 
 
+### ES6语法处理——babel的使用
+
++ 很多浏览器没有支持es6，适用性差
++ 打包的时候es6都转为es5，最终bundle.js文件应该都是es5的语法
++ 安装babel-loader、babel-core、babel-prest-es2015
++ 配置相应规则
+![iTa2BJ.png](https://i.328888.xyz/2023/05/05/iTa2BJ.png)
+![iTam0z.png](https://i.328888.xyz/2023/05/05/iTam0z.png)
 
 
+### webpack配置vue
 
++ 安装vue
++ 引入vue，写一些vue代码
++ 如果不配置 默认引入的vue文件是runtime-only这个版本不能用template
++ 如果配置了地址 引入的就是runtime-compiler 可以有template
+  + 指定使用的vue文件路径
+  ![iTQgup.png](https://i.328888.xyz/2023/05/05/iTQgup.png)
+  + 同时有el和template时，template中的内容整体替换#app的div
+  ![iTY7SA.png](https://i.328888.xyz/2023/05/06/iTY7SA.png)
 
-
-
-
-
-
+![iTaF13.png](https://i.328888.xyz/2023/05/05/iTaF13.png)
+![iTQcva.png](https://i.328888.xyz/2023/05/05/iTQcva.png)
+![iTYx3c.png](https://i.328888.xyz/2023/05/06/iTYx3c.png)
 
 
 
@@ -134,3 +207,40 @@ alias 取别名
 
 + 当在DOM中标签引入取别名的路径必须要增加~
 ![ioNRgA.png](https://i.328888.xyz/2023/04/24/ioNRgA.png)
+
+### 扩充
+
+1. 文件夹组织方式
+
++ 作为入口的main.js放在外层
+其他功能js代码放在文件夹中
+
+2. bundle的意思是包
+
+3. gitbook这个软件写的文档同步出去的会有这个网站名
+![iK6Uaw.png](https://i.328888.xyz/2023/04/29/iK6Uaw.png)
+
++ 非盈利组织的网站后缀叫org
++ 盈利组织用com
+
+4. --save-dev 开发时依赖
+![iK65id.png](https://i.328888.xyz/2023/04/29/iK65id.png)
+
+5. 早期dos操作系统文件后缀名只支持3位
+
+所以jpg和jpeg是一个文件
+
+htm就是html
+
+现在windows系统可以支持很多位文件后缀
+
+6. env就是environment环境的缩写
+
+7. exclude排除
+   include包含
+
+8. vue项目最终会编译成2个版本
+
++ runtime-only 代码中不能有template
++ runtime-compiler 可以有template，因为vue的代码有compiler可以编译template
++ 
