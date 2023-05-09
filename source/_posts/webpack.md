@@ -190,10 +190,67 @@ categories:
 ![iTaF13.png](https://i.328888.xyz/2023/05/05/iTaF13.png)
 ![iTQcva.png](https://i.328888.xyz/2023/05/05/iTQcva.png)
 ![iTYx3c.png](https://i.328888.xyz/2023/05/06/iTYx3c.png)
+![iQLLcZ.png](https://i.328888.xyz/2023/05/09/iQLLcZ.png)
+
+![iQLajQ.png](https://i.328888.xyz/2023/05/09/iQLajQ.png)
+![iQL1FE.png](https://i.328888.xyz/2023/05/09/iQL1FE.png)
+![iQLqlP.png](https://i.328888.xyz/2023/05/09/iQLqlP.png)
+
+
++ .vue文件要安装两个东西
++ vue-loader —— vue文件加载
+  vue-template-compiler —— vue编译
++ 这俩仅开发时使用，加载编译完就不需要了
++ vue-loader 如果大于14（估摸）需要再装个插件才能运行，要不会报错让你安装那个插件
++ 安装一个13多的版本就不报错了
+
++ .vue文件封装过程
+
+#### 以上loader就讲完
+
+### webpack另一个核心——plugin
+
+![iQLuxX.png](https://i.328888.xyz/2023/05/09/iQLuxX.png)
+
+1. 添加版权的plugin
+![iQMWwb.png](https://i.328888.xyz/2023/05/09/iQMWwb.png)
+2. 打包html的plugin
+![iQM0Mz.png](https://i.328888.xyz/2023/05/09/iQM0Mz.png)
+3. js丑化压缩的plugin
+![iQMwca.png](https://i.328888.xyz/2023/05/09/iQMwca.png)
 
 
 
 
+### 搭建本地服务器
+
+
+**搭建服务器步骤**
++ 安装webpack-dev-server   webpack的本地服务
++ 配置devServer 
+```
+contentBase:'./dist',
+inline: true
+```
++ 配置 ` 'dev': 'webpack-dev-server --open' ` 执行npm run dev 就会直接打开网页
+
+![iQM2sx.png](https://i.328888.xyz/2023/05/09/iQM2sx.png)
+![iQMOyk.png](https://i.328888.xyz/2023/05/09/iQMOyk.png)
+base公共
+prod生产
+dev开发
+![配置路径脚本](https://i.328888.xyz/2023/05/09/iQMjGp.png)
+
+### webpack配置文件的分离
+
+base公共
+prod生产
+dev开发 
+
+公共和开发/生产 文件进行合并
+需要安装webpack-merge
+
+ 
 
 ### 文件路径配置——给文件起别名
 
@@ -243,4 +300,8 @@ htm就是html
 
 + runtime-only 代码中不能有template
 + runtime-compiler 可以有template，因为vue的代码有compiler可以编译template
-+ 
++ compiler编译的意思
+
+9. 后缀扩展名都不想写怎么配置
+
++ webpack.config.js中 extensions:['.vue','.js','.css']
