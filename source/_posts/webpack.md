@@ -9,16 +9,15 @@ categories:
 详见下文
 <!--more-->
 
-### 内容概述
-
-+ 认识webpack
-+ webpack的安装
-+ webpack的起步
-+ webpack的配置
-+ loader的使用
-+ webpack中配置vue
-+ plugin的使用
-+ 搭建本地服务器
+> ### 内容概述
+> + 认识webpack
+> + webpack的安装
+> + webpack的起步
+> + webpack的配置
+> + loader的使用
+> + webpack中配置vue
+> + plugin的使用
+> + 搭建本地服务器
 
 ### 什么是webpack
 
@@ -305,3 +304,23 @@ htm就是html
 9. 后缀扩展名都不想写怎么配置
 
 + webpack.config.js中 extensions:['.vue','.js','.css']
+
+
+> ### 内容回顾
+> 1. 什么是webpack
+> + webpack和glup对比
+> + webpack依赖环境
+> + 安装webpack
+> 2. webpack的起步
+> + webpack命令
+> + webpack配置：webpack.config.js/package.json
+> 3. webpack的loader
+> + css-loader/style-loader
+> + less-loader/less
+> + url-loader/file-loader
+> + babel-loader
+> 4. webpack中配置vue
+> 5. webpack的plugin
+> 6. 搭建本地服务器
+> + webpack-dev-serve
+> 7. 配置文件的分离
