@@ -54,10 +54,51 @@ render函数
 virtual dom —— 虚拟dom
 UI上面的是真实dom，最终会把虚拟dom渲染成真实dom
 + 区别
-runtime-compiler：
+**runtime-compiler：**
 template->ast->render->vdom->UI
-runtime-only：
+**runtime-only：**
 render->vdom->UI
++ 下面的文件更轻，打包更小，以后项目都选runtime-only
+
+### render函数是什么
+
+1. render函数的用法
++ 普通用法，给createElement函数传入元素名、属性、内容
++ 给createElement函数传入组件
+
+2. render(h)=>{return h(APP)} 这个h只是个函数名代号
+其实是createElement这个函数
+![VZrziV.png](https://i.328888.xyz/2023/05/14/VZrziV.png)
+
+![VZrh0z.png](https://i.328888.xyz/2023/05/14/VZrh0z.png)
+![VZrSJa.png](https://i.328888.xyz/2023/05/14/VZrSJa.png)
+![VZr95L.png](https://i.328888.xyz/2023/05/14/VZr95L.png)
+
+### npm run dev 和 build 底层图
+![VZrLbU.png](https://i.328888.xyz/2023/05/14/VZrLbU.png)
+![VZrMzv.png](https://i.328888.xyz/2023/05/14/VZrMzv.png)
+
+
+### 修改webpack配置: 起别名(参照其他讲过的)
+
+![VZraCy.png](https://i.328888.xyz/2023/05/14/VZraCy.png)
+
+### 认识 Vue CLI3
+
+![VZ3fbE.png](https://i.328888.xyz/2023/05/14/VZ3fbE.png)
+![VZRGpw.png](https://i.328888.xyz/2023/05/14/VZRGpw.png)
+![VZRodL.png](https://i.328888.xyz/2023/05/14/VZRodL.png)
+![VZRgdN.png](https://i.328888.xyz/2023/05/14/VZRgdN.png)
+```
+$mount('#app') 和 el:'#app' 方式都是一样的 在源码做了一层判断，如果没有传el就会自己执行 $mount('#app')，最终都是把#app的元素替换成传入的元素
+```
+
++ 如何找到vue的配置文件
+    1. vue ui 会启动一个可视化本地服务，里面可以修改配置
+    2. 去modules文件里找
+    3. 添加vue.config.js文件，到时候会和vue的module里面的配置进行合并
+    ![VZRsup.png](https://i.328888.xyz/2023/05/14/VZRsup.png)
+    ![VZcA9J.png](https://i.328888.xyz/2023/05/14/VZcA9J.png)
 
 
 ### 扩展
@@ -83,7 +124,10 @@ v8引擎用c++写的
 + 选择了eslint但是不想用怎么关掉
 ![iuIXHy.png](https://i.328888.xyz/2023/05/12/iuIXHy.png)
 把这个设置成false，重新编译项目，就可以了
-
+11. preset 配置
+12. manually select features 手动的选择特性
+13. rc —— run command 运行终端 
+14. vcs —— 版本控制系统
 
 
 > ### 内容回顾
