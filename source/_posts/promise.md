@@ -7,9 +7,10 @@ tags:
 categories:
    - 笔记
 ---
+亲手打的教程，还学不会Promise?
 <!--more-->
 
-### 01-promise的使用
+### 1-promise的使用
 #### 1.1-promise的基本使用
 
 + promise是一种优雅的方式解决回调地狱问题
@@ -181,3 +182,31 @@ new Promise(resolve=>{
 ```
 
 ![Vii5UF.png](https://i.328888.xyz/2023/05/15/Vii5UF.png)
+
+#### 1.4-Promise的all方法使用
+
++ Promise.all(iterator)
+iterator这个参数的含义是可迭代的，可遍历的
+数组就满足这个特性
+所以可以传入数组
+
++ 如果遇到某个需求要发送两次请求，拿到两次请求结果再进行操作可以用到Promise.all
+
+```
+Promise.all([
+    new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            resolve('result1')
+        },2000)
+    }),
+    new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            resolve('result2')
+        },1000)
+    })
+]).then(results=>{
+    console.log(results)
+})
+```
+
+![ViJyOo.png](https://i.328888.xyz/2023/05/16/ViJyOo.png)
